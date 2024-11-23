@@ -1,0 +1,37 @@
+services:
+  App\:
+    resource: '../src/*'
+    exclude: '../src/{Tests}'
+    autowire: true
+    autoconfigure: true
+
+  App\Generators\RandomStringGenerator:
+    arguments:
+      $stringLength: '%stringLength%'
+    tags:
+      - { name: 'app.generator' }
+
+  App\Generators\RandomStringArrayGenerator:
+    arguments:
+      $stringLength: '%stringLength%'
+      $arraySize: '%arraySize%'
+    tags:
+      - { name: 'app.generator' }
+
+  App\Converters\StringPatternConverter:
+    tags:
+      - { name: 'app.converter' }
+
+  App\Converters\Rot13Converter:
+    tags:
+      - { name: 'app.converter' }
+
+  App\GeneratorCollection:
+    public: true
+    arguments:
+      $generators: !tagged 'app.generator'
+      $converters: !tagged 'app.converter'
+
+parameters:
+  stringLength: 6
+  arraySize: 3
