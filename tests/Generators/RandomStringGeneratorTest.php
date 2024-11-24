@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace Tests\Generators;
 
 use App\Generators\RandomStringGenerator;
 use App\Generators\StringGeneratorTrait;
@@ -18,11 +18,13 @@ class RandomStringGeneratorTest extends TestCase
         $generator = new RandomStringGenerator($stringLength);
         $result = $generator->generate();
 
-        $this->assertIsString($result);
         $this->assertEquals($stringLength, strlen($result));
         $this->assertMatchesRegularExpression('/^[a-zA-Z0-9]+$/', $result);
     }
 
+    /**
+     * @return array<string, list<int>>
+     */
     public static function generateDataProvider(): array
     {
         return [

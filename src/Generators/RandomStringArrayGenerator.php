@@ -12,6 +12,9 @@ readonly class RandomStringArrayGenerator implements GeneratorInterface
     ) {
     }
 
+    /**
+     * @return string[]
+     */
     public function generate(): array
     {
         $result = [];

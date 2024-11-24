@@ -8,8 +8,8 @@ use App\Generators\GeneratorInterface;
 readonly class GeneratorCollection
 {
     /**
-     * @param iterable<GeneratorInterface> $generators
-     * @param iterable<ConverterInterface> $converters
+     * @param GeneratorInterface[] $generators
+     * @param ConverterInterface[] $converters
      */
     public function __construct(
         private iterable $generators,
@@ -17,6 +17,9 @@ readonly class GeneratorCollection
     ) {
     }
 
+    /**
+     * @return array<class-string<GeneratorInterface>, array<string|string[]>>
+     */
     public function process(): array
     {
         $result = [];

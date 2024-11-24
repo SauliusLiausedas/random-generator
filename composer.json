@@ -9,5 +9,10 @@
         "symfony/dependency-injection": "6.4.*",
         "symfony/config": "6.4.*",
         "symfony/filesystem": "6.4.*"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     }
 }

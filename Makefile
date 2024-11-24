@@ -7,6 +7,6 @@ execute:
 sniff:
 	php ./vendor/bin/phpcs --standard=PSR12 ./src ./tests
 stan:
-	php ./vendor/bin/phpstan analyse ./src ./tests
+	php ./vendor/bin/phpstan analyse ./src ./tests --level=9
 test:
 	php ./vendor/bin/phpunit --testdox

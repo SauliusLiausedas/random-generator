@@ -11,13 +11,12 @@ $stringOptions = getopt('s::', ['stringLength::']);
 $arrayOptions = getopt('a::', ['arraySize::']);
 $stringLength = $stringOptions['s'] ?? $stringOptions['stringLength'] ?? 6;
 $arraySize = $arrayOptions['a'] ?? $arrayOptions['arraySize'] ?? 3;
-
 $container = new ContainerBuilder();
 $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/config'));
 $loader->load('services.yaml');
 
-$container->setParameter('stringLength', $stringLength);
-$container->setParameter('arraySize', $arraySize);
+$container->setParameter('stringLength', (int) $stringLength);
+$container->setParameter('arraySize', (int) $arraySize);
 
 $container->compile();
 

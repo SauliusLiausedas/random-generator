@@ -1,6 +1,6 @@
 <?php
 
-namespace tests;
+namespace Tests;
 
 use App\Converters\ConverterInterface;
 use App\Converters\Rot13Converter;
@@ -10,7 +10,7 @@ use App\Generators\GeneratorInterface;
 use App\Generators\RandomStringArrayGenerator;
 use App\Generators\RandomStringGenerator;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(GeneratorCollection::class)]
@@ -36,6 +36,10 @@ class GeneratorCollectionTest extends TestCase
         }
     }
 
+    /**
+     * @return array{GeneratorInterface[], ConverterInterface[]}
+     * @throws Exception
+     */
     private function getMocks(): array
     {
         $generatorMock = $this->createMock(RandomStringGenerator::class);
@@ -45,6 +49,7 @@ class GeneratorCollectionTest extends TestCase
         $generatorMock1->method('generate')->willReturn(['generated1', 'generated2', 'generated3']);
 
         $converterMock = $this->createMock(Rot13Converter::class);
+        $converterMock1 = $this->createMock(StringPatternConverter::class);
         $map = [
             [['generatedString'], ['convertedString']],
             [['generated1', 'generated2', 'generated3'], ['converted1', 'converted2', 'converted3']]
@@ -52,7 +57,6 @@ class GeneratorCollectionTest extends TestCase
         $converterMock->method('convert')
             ->willReturnMap($map);
 
-        $converterMock1 = $this->createMock(StringPatternConverter::class);
         $converterMock1->method('convert')
             ->willReturnMap($map);
 
